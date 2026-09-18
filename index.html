@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG // Random Project Generator</title>
+    <style>
+        :root {
+            --bg: #fcfcfc;
+            --card: #ffffff;
+            --text: #111827;
+            --text-muted: #6b7280;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --border: #e5e7eb;
+            --radius: 16px;
+            --shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: var(--card);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.05em;
+            color: var(--text);
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-size: 1rem;
+        }
+
+        .category-group {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: white;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.15s;
+            color: var(--text-muted);
+        }
+
+        .category-btn.active {
+            background: var(--text);
+            color: white;
+            border-color: var(--text);
+        }
+
+        .category-btn:hover:not(.active) {
+            background: var(--bg);
+            border-color: var(--text-muted);
+        }
+
+        .result-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+            min-height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+        }
+
+        .result-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--text);
+            transition: opacity 0.1s;
+        }
+
+        .generate-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s;
+        }
+
+        .generate-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .generate-btn:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>RPG</h1>
+        <p class="subtitle">Random Project Generator</p>
+
+        <div class="category-group" id="categories">
+            <button class="category-btn active" data-cat="all">All</button>
+            <button class="category-btn" data-cat="software">Software</button>
+            <button class="category-btn" data-cat="hardware">Hardware</button>
+            <button class="category-btn" data-cat="lifestyle">Lifestyle</button>
+        </div>
+
+        <div class="result-card" id="resultCard">
+            <div class="result-text" id="resultText">Generate a weekend project.</div>
+        </div>
+
+        <button class="generate-btn" id="generateBtn">Generate</button>
+    </div>
+
+    <script>
+        const data = {
+            modifiers: [
+                "Over-engineered", "Local-first", "Minimalist", "Single-purpose", 
+                "Obsessively documented", "Aggressively simple", "Low-latency", 
+                "Privacy-focused", "Cross-platform", "Open-source",
+                "Headless", "Static", "Distributed", "Automated",
+                "Experimental", "Lightweight", "Custom-built", "Modular",
+                "Sleek", "Robust", "High-performance", "Battery-optimized",
+                "Accessible", "Cloud-synced", "Encrypted", "Thread-safe"
+            ],
+            descriptors: [
+                "efficient", "niche", "integrated", "focused", 
+                "streamlined", "customizable", "portable", "automated",
+                "discrete", "dedicated", "modular", "optimized",
+                "independent", "lightweight", "intuitive",
+                "stable", "scalable", "extensible", "performant"
+            ],
+            products: {
+                software: [
+                    "Habit Tracker", "Password Manager", "Portfolio Site", 
+                    "Recipe Organizer", "Mood Journal", "Personal Finance Tool", 
+                    "Focus Timer", "Budgeting App", "Email Client", 
+                    "To-do List", "Spreadsheet", "Calendar",
+                    "Markdown Editor", "Pomodoro Timer", "Weather CLI",
+                    "Note app", "RSS Reader", "API Wrapper", 
+                    "Discord Bot", "Static Site Generator", "Password Gen",
+                    "Trello Clone", "Custom Shell", "Git Helper",
+                    "Personal CRM", "Unit Converter",
+                    "JSON Validator", "Markdown Converter", "Local Search",
+                    "Keyboard Macro", "Log Viewer", "Emoji IDE"
+                ],
+                hardware: [
+                    "Coffee-maker", "Plant-waterer", "Desk Lamp", 
+                    "Custom Keyboard", "Pet-feeder", "Digital Clock", 
+                    "Air Monitor", "Smart Mirror", "Toaster", 
+                    "Beverage Dispenser", "Socks-sorter", "Alarm Clock",
+                    "USB-C Toaster", "Mechanical Switch", "Pi-powered Tool",
+                    "Smart Hat", "IoT Device", "Automatic Page-turner",
+                    "Haptic Pillow", "LED Fridge-strip", "Smart Lock",
+                    "Smart Coaster", "Auto-Stapler", "Self-stirring Mug", "BT-Toothbrush",
+                    "Mood-ring", "Pi Bird-watcher", "USB-C Fan",
+                    "RGB Pen", "Smart Door-stop", "Haptic Clock"
+                ],
+                lifestyle: [
+                    "Morning Routine", "Reading Challenge", "Meditation Space", 
+                    "Wardrobe Organizer", "Meal Prep System", "Travel Itinerary", 
+                    "Workout Plan", "Digital Detox", "Sleep Schedule", 
+                    "Garden Layout", "Hobby Track", "Diet Plan",
+                    "Capsule Wardrobe", "Cable Management", "Plant Rotation",
+                    "Cleaning Protocol", "Coffee Ceremony", "Minimalist Guide",
+                    "Poetry List", "Receipt Archive",
+                    "Tea Protocol", "Font Collection", "Paper System",
+                    "Nap Schedule", "Plant Naming", "Lego-sort",
+                    "Joke Archive", "Museum List", "Shoe Rotation"
+                ]
+            },
+            goals: [
+                "that works entirely offline",
+                "integrated with a single API",
+                "designed for maximum privacy",
+                "that focuses on a single metric",
+                "optimized for low power consumption",
+                "that requires no external dependencies",
+                "designed for a specific niche use-case",
+                "that automates one tedious task",
+                "which works across multiple devices",
+                "that uses a custom data format"
+            ]
+        };
+
+        let currentCategory = 'all';
+        const catBtns = document.querySelectorAll('.category-btn');
+        const genBtn = document.getElementById('generateBtn');
+        const resultText = document.getElementById('resultText');
+        const resultCard = document.getElementById('resultCard');
+
+        catBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                catBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentCategory = btn.dataset.cat;
+            });
+        });
+
+        function getRandom(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function generate() {
+            let productPool = [];
+            if (currentCategory === 'all') {
+                productPool = [...data.products.software, ...data.products.hardware, ...data.products.lifestyle];
+            } else {
+                productPool = data.products[currentCategory];
+            }
+
+            const prod = getRandom(productPool);
+            const roll = Math.random();
+            let result = "";
+
+            if (roll < 0.4) {
+                result = `A ${getRandom(data.modifiers)} ${prod}`;
+            } else if (roll < 0.7) {
+                result = `A ${getRandom(data.modifiers)}, ${getRandom(data.descriptors)} ${prod}`;
+            } else {
+                result = `A ${prod} ${getRandom(data.goals)}`;
+            }
+
+            resultText.style.opacity = 0;
+            
+            setTimeout(() => {
+                resultText.innerText = result;
+                resultText.style.opacity = 1;
+            }, 100);
+        }
+
+        genBtn.addEventListener('click', generate);
+    </script>
+</body>
+</html>
