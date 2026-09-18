@@ -140,6 +140,7 @@
             <button class="category-btn active" data-cat="all">All</button>
             <button class="category-btn" data-cat="software">Software</button>
             <button class="category-btn" data-cat="hardware">Hardware</button>
+            <button class="category-btn" data-cat="security">Security</button>
             <button class="category-btn" data-cat="lifestyle">Lifestyle</button>
         </div>
 
@@ -159,14 +160,22 @@
                 "Headless", "Static", "Distributed", "Automated",
                 "Experimental", "Lightweight", "Custom-built", "Modular",
                 "Sleek", "Robust", "High-performance", "Battery-optimized",
-                "Accessible", "Cloud-synced", "Encrypted", "Thread-safe"
+                "Accessible", "Cloud-synced", "Encrypted", "Thread-safe",
+                "CLI-driven", "Keyboard-centric", "Zero-config", "Self-hosted",
+                "Plugin-based", "Event-driven", "State-managed", "Reactive",
+                "Schema-less", "Type-safe", "Immutable", "Asynchronous",
+                "Low-fidelity", "High-contrast", "Hyper-optimized", "Bare-metal",
+                "Paranoid", "Zero-trust", "Air-gapped", "Stealthy", 
+                "Hardened", "Obfuscated", "Adversarial", "Cryptographically secure"
             ],
             descriptors: [
                 "efficient", "niche", "integrated", "focused", 
                 "streamlined", "customizable", "portable", "automated",
                 "discrete", "dedicated", "modular", "optimized",
                 "independent", "lightweight", "intuitive",
-                "stable", "scalable", "extensible", "performant"
+                "stable", "scalable", "extensible", "performant",
+                "minimal", "robust", "versatile", "refined",
+                "accurate", "seamless", "compact", "agile"
             ],
             products: {
                 software: [
@@ -194,6 +203,15 @@
                     "Mood-ring", "Pi Bird-watcher", "USB-C Fan",
                     "RGB Pen", "Smart Door-stop", "Haptic Clock"
                 ],
+                security: [
+                    "Packet Sniffer", "Password Auditor", "Firewall Rule-set", 
+                    "Honey-pot", "Log Analyzer", "MAC Address Spoofer", 
+                    "Port Scanner", "Encryption Tool", "Secret Manager", 
+                    "Vulnerability Scanner", "Keylogger Detector", "Network Map",
+                    "Auth Proxy", "Credential Rotator", "Traffic Shaper",
+                    "Entropy Generator", "Secure Vault", "Kernel Module",
+                    "Payload Generator", "Traffic Mirror", "VPN Client"
+                ],
                 lifestyle: [
                     "Morning Routine", "Reading Challenge", "Meditation Space", 
                     "Wardrobe Organizer", "Meal Prep System", "Travel Itinerary", 
@@ -217,7 +235,22 @@
                 "designed for a specific niche use-case",
                 "that automates one tedious task",
                 "which works across multiple devices",
-                "that uses a custom data format"
+                "that uses a custom data format",
+                "that eliminates a specific distraction",
+                "optimized for one-handed use",
+                "that requires no onboarding",
+                "which functions as a digital garden",
+                "designed for long-term archival",
+                "that uses only system-native tools",
+                "which solves a very specific annoyance",
+                "that reduces cognitive load",
+                "optimized for accessibility",
+                "that runs as a background daemon",
+                "that alerts you if a single packet is dropped",
+                "designed to withstand a state-level actor",
+                "that encrypts data using a custom algorithm",
+                "which logs every keystroke to a physical printer",
+                "that wipes the drive if the wrong key is pressed"
             ]
         };
 
@@ -242,7 +275,7 @@
         function generate() {
             let productPool = [];
             if (currentCategory === 'all') {
-                productPool = [...data.products.software, ...data.products.hardware, ...data.products.lifestyle];
+                productPool = [...data.products.software, ...data.products.hardware, ...data.products.security, ...data.products.lifestyle];
             } else {
                 productPool = data.products[currentCategory];
             }
